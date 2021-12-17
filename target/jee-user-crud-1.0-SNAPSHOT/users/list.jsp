@@ -34,11 +34,17 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Lista użytkowników</h1>
-                        <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" href="/user/add"><i
+                        <h1 class="h3 mb-0 text-gray-800">UsersCRUD</h1>
+                        <a href="/user/add" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Dodaj użytkownika</a>
                     </div>
 
+                    <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary"></h6> Lista użytkowników</h6>
+                    </div>
+
+                    <div class="card-body">
                     <table class="table">
                         <thead>
                         <tr>
@@ -55,14 +61,16 @@
                                 <td>${user.userName}</td>
                                 <td>${user.email}</td>
                                 <td>
-                                    
+                                    <a href="/user/edit?id=${user.id}">Edytuj</a>
+                                    <a href="/user/show?id=${user.id}">Pokaż</a>
+                                    <a href="/user/delete?id=${user.id}">Usuń</a>
                                 </td>
                             </tr>
                         </c:forEach>
                         </tbody>
-
-
                     </table>
+                    </div>
+                    </div>
 
                     <!-- Content Row -->
                     <div class="row">

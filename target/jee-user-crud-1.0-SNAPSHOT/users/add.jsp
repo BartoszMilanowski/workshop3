@@ -29,28 +29,31 @@
 
 <%@include file="/theme/header.jsp"%>
 
-<!-- Begin Page Content -->
-<div class="container-fluid">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">UsersCRUD</h1>
+    <a href="/user/list" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> Lista użytkowników</a>
+</div>
 
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Lista użytkowników</h1>
-        <a href="<c:url value="/user/add"/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Dodaj użytkownika</a>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"></h6> Dodaj użytkownika</h6>
     </div>
+    <div class="card-body">
+        <form method="post">
+            Nazwa<br/>
+            <input name="userName" type="text" class="form-control" placeholder="Nazwa użytkownika"/><br/>
+            E- mail<br/>
+            <input name="email" type="text" class="form-control" placeholder="E-mail użytkownika"/><br/>
+            Hasło<br/>
+            <input name="password" type="password" class="form-control" placeholder="Hasło użytkownika"/><br/>
+            <button type="submit" class="btn btn-primary">Zapisz</button>
+        </form>
+    </div>
+</div>
 
-    <form method="post">
-        <div class="form-group">
-            <input name="userName" type="text" class="form-control" id="userName" placeholder="Nazwa użytkownika"/>
-        </div>
-        <div class="form-group">
-            <input name="email" type="text" class="form-control" id="email" placeholder="Adres e-mail"/>
-        </div>
-        <div class="form-group">
-            <input name="password" type="text" class="form-control" id="password" placeholder="Hasło"/>
-        </div>
-        <button type="submit" class="btn btn-primary">Zapisz</button>
-    </form>
+
 
 
 

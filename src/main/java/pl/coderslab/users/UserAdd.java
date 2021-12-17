@@ -9,16 +9,19 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet("/user/add")
-public class AddUser extends HttpServlet {
+public class UserAdd extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
+        response.setCharacterEncoding("utf-8");
 
         getServletContext().getRequestDispatcher("/users/add.jsp").forward(request, response);
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        request.setCharacterEncoding("utf-8");
 
         String userName = request.getParameter("userName");
         String email = request.getParameter("email");
@@ -27,6 +30,8 @@ public class AddUser extends HttpServlet {
         User user = new User(userName, email, password);
         UserDao userDao = new UserDao();
         userDao.create(user);
+
+        response.sendRedirect(request.getContextPath() + "/user/list");
 
     }
 }
