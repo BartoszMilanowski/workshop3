@@ -10,14 +10,10 @@ import java.io.IOException;
 
 @WebServlet("/user/show")
 public class UserShow extends HttpServlet {
+    private UserDao userDao = new UserDao();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        response.setCharacterEncoding("utf-8");
-        request.setCharacterEncoding("utf-8");
-
         String id = request.getParameter("id");
-        UserDao userDao = new UserDao();
         User user = userDao.read(Integer.parseInt(id));
         request.setAttribute("user", user);
         getServletContext().getRequestDispatcher("/users/show.jsp").forward(request, response);

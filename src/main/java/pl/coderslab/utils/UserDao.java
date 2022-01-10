@@ -14,7 +14,10 @@ public class UserDao {
             "SELECT * FROM users where id = ?";
 
     private static final String UPDATE_USER_QUERY =
-            "UPDATE users SET username = ?, email = ?, password = ? where id = ?";
+            "UPDATE users SET username = ?, email = ? where id = ?";
+
+    private static final String UPDATE_PASS_QUERY=
+            "UPDATE users SET password = ? WHERE id = ?";
 
     private static final String DELETE_USER_QUERY =
             "DELETE FROM users WHERE id = ?";
@@ -26,7 +29,7 @@ public class UserDao {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    public static User read(int userId) {
+    public User read(int userId) {
         try (Connection conn = DbUtil.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(READ_USER_QUERY);
             statement.setInt(1, userId);
@@ -47,7 +50,7 @@ public class UserDao {
 
 
 
-    public static User create(User user) {
+    public User create(User user) {
         try (Connection conn = DbUtil.getConnection()) {
             PreparedStatement statement =
                     conn.prepareStatement(CREATE_USER_QUERY, Statement.RETURN_GENERATED_KEYS);
@@ -70,8 +73,18 @@ public class UserDao {
             PreparedStatement statement = conn.prepareStatement(UPDATE_USER_QUERY);
             statement.setString(1, user.getUserName());
             statement.setString(2, user.getEmail());
-            statement.setString(3, this.hashPassword(user.getPassword()));
-            statement.setInt(4, user.getId());
+//            statement.setString(3, this.hashPassword(user.getPassword()));
+            statement.setInt(3, user.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void updatePass(String password, int id){
+        try (Connection conn = DbUtil.getConnection()) {
+            PreparedStatement statement = conn.prepareStatement(UPDATE_PASS_QUERY);
+            statement.setString(1, password);
+            statement.setInt(2,id);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

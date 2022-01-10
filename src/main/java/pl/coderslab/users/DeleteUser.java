@@ -10,15 +10,12 @@ import java.io.IOException;
 
 @WebServlet("/user/delete")
 public class DeleteUser extends HttpServlet {
+
+    private UserDao userDao = new UserDao();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        response.setContentType("text/html");
-        response.setCharacterEncoding("utf-8");
-        request.setCharacterEncoding("utf-8");
-
         String id = request.getParameter("id");
-        UserDao userDao = new UserDao();
         userDao.delete(Integer.parseInt(id));
 
         response.sendRedirect(request.getContextPath() + "/user/list");
